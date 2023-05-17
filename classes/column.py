@@ -1,4 +1,4 @@
-class column:
+class Column:
     id = None
     board_id = None
 

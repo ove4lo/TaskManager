@@ -1,4 +1,4 @@
-class task:
+class Task:
     id = None
     title = None
     description = None
