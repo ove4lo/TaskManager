@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
+from database import DB
+
+db = DB() #база данных
 
 root = Tk() #основа
 
@@ -7,6 +10,22 @@ root.title('Login') #название
 root.geometry('925x500+300+200') #размер
 root.configure(bg = 'white') #цвет заднего фона
 root.resizable(False, False) #неизменный экран
+
+def sign_in():
+    #здесь будет проверка на пользователя, есть ли он в бд или нет
+    #если его нет, то создаются маленькие окошки-оповещения, что неверно или не существует
+    login = user_in.get()
+    password = password_in.get()
+
+    correct = db.authorized_user(login, password) 
+    if correct == 1:
+        screen = Toplevel(root)
+        screen.Title('App')
+        screen.geometry('925x500+300+200')
+        screen.config('white')
+        screen.mainloop()
+    else:
+        messagebox.showerror("Invalid", "Invalid data or doesn't exist!")
 
 
 img = PhotoImage(file = 'image\login.png') #изображение 
@@ -56,7 +75,7 @@ password_in.bind('<FocusOut>', on_leave)
 Frame(frame, width = 295, height = 2, bg = 'light grey').place(x = 25, y = 177) #окончание блока пароля
 ##########################
 
-Button(frame, width = 39, pady = 9, text= 'войти', bg = '#57a1f8', fg = 'white', border = 0).place(x = 35, y = 204) #расположение войти
+Button(frame, width = 39, pady = 9, text= 'войти', bg = '#57a1f8', fg = 'white', border = 0, command = sign_in).place(x = 35, y = 204) #расположение войти
 
 label = Label(frame, text = "Нет аккаунта?", bg = 'white', fg = 'black',  font = ('Microsoft YaHei UI Light', 9))
 label.place(x = 76, y = 270) #расположение нет аккаунта
