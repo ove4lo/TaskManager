@@ -12,7 +12,7 @@ root.resizable(False, False) #неизменный экран
 img = PhotoImage(file = 'image\signup.png') #изображение 
 Label(root, image = img, bg = 'white').place(x = 50, y = 80)  #расположение изображения
 
-frame = Frame(root, width = 350, height = 350, bg = 'white') #создание основного фрейма
+frame = Frame(root, width = 350, height = 400, bg = 'white') #создание основного фрейма
 frame.place(x = 480, y = 70) #расположение фрейма
 
 heading = Label(frame, text = 'Регистрация', fg = '#57a1f8', bg = 'white', font = ('Microsoft YaHei UI Light', 23, 'bold')) #оформление заголовка
@@ -62,13 +62,13 @@ def on_enter(n):
     password_in_repeat.delete(0, 'end')
 
 def on_leave(n):
-    repeat_password = password_in.get()
+    repeat_password = password_in_repeat.get()
     if repeat_password == '':
-        password_in_repeat.insert(0, 'password')
+        password_in_repeat.insert(0, 'repeat password')
 
 password_in_repeat = Entry(frame, width = 25, fg = 'grey', border = 0, bg = 'white', font = ('Microsoft YaHei UI Light', 11)) #оформление коробки пароля
 password_in_repeat.place(x = 30, y = 220) #расположение пароля
-password_in_repeat.insert(0, 'password') #внутри коробки пароля
+password_in_repeat.insert(0, 'repeat password') #внутри коробки пароля
 #видно, не видно
 password_in_repeat.bind('<FocusIn>', on_enter) 
 password_in_repeat.bind('<FocusOut>', on_leave)
@@ -76,5 +76,11 @@ Frame(frame, width = 295, height = 2, bg = 'light grey').place(x = 25, y = 247) 
 ##########################
 
 Button(frame, width = 39, pady = 9, text= 'Зарегистрироваться', bg = '#57a1f8', fg = 'white', border = 0).place(x = 35, y = 274) #расположение зарегистрироваться
+
+label = Label(frame, text = "У меня уже есть аккаунт", bg = 'white', fg = 'black',  font = ('Microsoft YaHei UI Light', 9))
+label.place(x = 76, y = 340) #расположение есть аккаунт
+
+sign_up = Button(frame, width = 6, text = 'Войти', border = 0, bg = 'white', fg =  '#57a1f8', cursor = 'hand2')
+sign_up.place(x = 218, y = 340) #расположение зарегистрироваться
 
 root.mainloop()
